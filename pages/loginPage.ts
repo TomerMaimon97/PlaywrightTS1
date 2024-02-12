@@ -1,7 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import UserCredentials from "../helpers/UserCredentials";
 import BasicUrl from "../helpers/BasicUrl";
-import { url } from "inspector";
 import { BasePage } from "./BasePage";
 import { ErrorMessages } from "../helpers/ErrorMessages";
 
@@ -20,8 +18,8 @@ export default class LoginPage extends BasePage{
         this.errorMessage = this.page.locator('[data-test= "error"]');
     }
 
-    public async LoginToWebsite(username = UserCredentials.STANDARTUSER, 
-        password = UserCredentials.PASSWORD, 
+    public async LoginToWebsite(username = process.env.STANDARTUSER as string, 
+        password = process.env.PASSWORD as string, 
         url = BasicUrl.BASE_URL) {
         await this.page.goto(url);
         await this.ValidateUrl(url)
